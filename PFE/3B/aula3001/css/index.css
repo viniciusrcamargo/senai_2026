@@ -25,7 +25,7 @@ body{
     min-height: 70vh;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     text-align: center;
     background: linear-gradient(180deg, #0ea5e9, #111827);
     padding: clamp(2rem, 5vw, 5rem);
