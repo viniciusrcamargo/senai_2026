@@ -1,0 +1,32 @@
+:root{
+    --cor-fundo-pagina: #0b1220;
+    --cor-fundo-cartao: #111827;
+    --cor-texto-principal: #e5e7eb;
+    --cor-texto-suave: #9ca3af;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: 'Roboto', 'Arial';
+    color: var(--cor-texto-principal);
+    background: var(--cor-fundo-pagina);
+}
+
+.container-pagina{
+    width: min(1100px, 90%);
+    margin: 0 auto;
+}
+
+.cabecalho-principal{
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #0ea5e9, #111827);
+    padding: clamp(2rem, 5vw, 5rem);
+}
