@@ -5,6 +5,7 @@ const imagem = document.querySelector('img[alt]')
 pg.style.fontWeight = 'bold';
 card.style.backgroundColor = 'yellow';
 card.style.width = '100px';
+card.style.height = '100px';
 card.style.border = '1px black solid';
 botao.textContent = 'enviar agora';
 imagem.style.width = '100px';
