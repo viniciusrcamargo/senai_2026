@@ -1,6 +1,6 @@
 class Veiculo{
     //atributos ou características
-    modelo = 'SUV';
+    modelo = 'SUv';
     marca = 'Honda - HRV';
     ano = 2025;
 
