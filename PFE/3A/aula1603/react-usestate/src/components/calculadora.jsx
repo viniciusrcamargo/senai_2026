@@ -3,7 +3,7 @@ import {useState} from 'react';
 export default function Calculadora({titulo}){
     const [num1, setNum1] = useState(0);
     const [num2, setNum2] = useState(0);
-    const [resultad, setResultado] = useState(0);
+    const [resultado, setResultado] = useState(0);
 
     function somar(e){
         e.preventDefault();
