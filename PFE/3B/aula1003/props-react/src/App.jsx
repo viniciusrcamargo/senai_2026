@@ -5,6 +5,7 @@ import MeuAvatar from './components/meuAvatar.jsx';
 import imagem from './assets/img/m.jpeg';
 
 function App() {
+  
     return (
     <>
       {/* <Mensagem titulo='Aprendendo Props ou Properties ou ainda Propriedades' texto='Bem vindo(a) ao mundo das Props' nome='Ana Luiza' />
