@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 
 export default function BuscaCep(){
-    const [cep, setCep] = useState(null);
+    const [cep, setCep] = useState('');
     const [endereco, setEndereco] = useState(null)
 
     useEffect(() =>{
