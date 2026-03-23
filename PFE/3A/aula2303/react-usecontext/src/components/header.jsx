@@ -8,7 +8,7 @@ export default function Header(){
         <header className={`header-${tema}`}>
             <h1>Meu primeiro site com Tema de Contexto</h1>
             <button onClick={mudarTema}>
-                Mudar tema para {tema === 'light' ? 'claro' : 'claro'}
+                Mudar tema para {tema === 'light' ? 'escuro' : 'claro'}
             </button>
         </header>
     )
