@@ -1,0 +1,47 @@
+/* Reset simples — mantém o padrão usado no principal.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* A seção container segue o mesmo estilo de estrutura */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #fff8dc; /* mesmo amarelo claro dos cards */
+    border: 2px solid #f4c542;
+    border-radius: 10px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Título igual ao estilo aplicado no banner */
+.container h2 {
+    font-size: 28px;
+    color: #d35400; /* tom laranja usado nos cards */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Texto longo com boa leitura */
+.container p {
+    line-height: 1.6;
+    font-size: 16px;
+    color: #333;
+    text-align: justify;
+    white-space: pre-line; /* Mantém as quebras do texto original */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .container h2 {
+        font-size: 24px;
+    }
+}
