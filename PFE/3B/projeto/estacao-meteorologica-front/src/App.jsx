@@ -1,6 +1,6 @@
 import Rotas from './routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.js'
+import 'bootstrap/dist/js/bootstrap.bundle.js';
 
 function App() {
   return (
