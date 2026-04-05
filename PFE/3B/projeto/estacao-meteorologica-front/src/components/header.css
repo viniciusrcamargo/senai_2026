@@ -1,0 +1,6 @@
+.destaque-link:hover{
+    font-weight: bold;
+    color: #000 !important;
+    border: #000 1px solid;
+    transition: all 0.2s ease;
+}
