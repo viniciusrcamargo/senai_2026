@@ -1,0 +1,2 @@
+azul = #fdf0d5
+texto = #003049
