@@ -1,0 +1,9 @@
+/* melhora a imagem no card */
+.object-fit-cover {
+    object-fit: cover;
+}
+
+/* opcional: deixa a fonte do título mais material-like */
+h2 {
+    letter-spacing: -0.5px;
+}
