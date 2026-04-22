@@ -66,6 +66,7 @@ export default function Registro() {
                                 Cadastrar
                             </Link>
                         </form>
+                        <p><Link to="/" className="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><i className="bi bi-arrow-left-circle me-2 "></i>Voltar</Link></p>
                     </div>
 
                 </div>
