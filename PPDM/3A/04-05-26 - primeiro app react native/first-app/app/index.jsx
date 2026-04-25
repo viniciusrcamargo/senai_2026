@@ -2,7 +2,7 @@ import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import Foto from '../assets/imagem.jpg';
 
 export default function Index() {
-  return (
+  return 
     <ScrollView>
       <View style={estilos.container}>
         <Text style={estilos.titulo}>My First App</Text>
