@@ -1,5 +1,6 @@
 // import GraficoBarra from "../../components/graficoBarra";
 import Header from "../components/header";
+import GraficoBarra from "../components/graficoBarra";
 
 export default function Dashboard() {
   return (
@@ -44,10 +45,10 @@ export default function Dashboard() {
         <h6 className="text-muted">Gráficos</h6>
         
         <div className="col-12 col-md card shadow-sm text-center p-3" style={{ height: "250px" }}>
-          {/* gráficos */}
+          <GraficoBarra />
         </div>
         <div className="col-12 col-md card shadow-sm text-center p-3" style={{ height: "250px" }}>
-          {/* gráficos */}
+          <GraficoBarra />
         </div>
       </section>
 

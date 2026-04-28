@@ -1,29 +1,29 @@
-import Header from '../../components/header'
+import Header from '../components/header'
 
 export default function Relatorio(){
     const leituras = [
-        {horario: "12:00", qualidadeAr: "Boa", iqa: 42, temperatura: "26ºC", umidade: "68%" },
-        {horario: "11:00", qualidadeAr: "Moderada", iqa: 55, temperatura: "50ºC", umidade: "50%" },
-        {horario: "18:00", qualidadeAr: "Boa", iqa: 60, temperatura: "20ºC", umidade: "75%" },
-        {horario: "10:00", qualidadeAr: "Ruim", iqa: 20, temperatura: "39ºC", umidade: "30%" }
+        {horario: "12:00", qualidadeAr: "Boa", iqa: 44, temperatura: "32ºC", umidade: "40%"} ,
+        {horario: "18:00", qualidadeAr: "Regular", iqa: 50, temperatura: "38ºC", umidade: "30%"} ,
+        {horario: "07:00", qualidadeAr: "Ruim", iqa: 20, temperatura: "5ºC", umidade: "10%"} ,
+        {horario: "11:00", qualidadeAr: "Boa", iqa: 60, temperatura: "31ºC", umidade: "68%"} 
     ]
 
     return(
         <div className="container">
             <Header />
-            <h3>Relatório Estação Meteorológica</h3>
-            <p>Monitoramento da temperatura e umidade em tempo real</p>
+            <h2>Relatório da Estação Meteorológica</h2>
+            <p>Dados sobre o clima em tempo real.</p>
 
             <section className="graficos">
-                {/* colocar gráficos */}
+                {/* inserir gráficos */}
             </section>
 
-            <section className="tabela-leituras">
+            <section className="leituras">
                 <table>
                     <thead>
                         <tr>
                             <th>Horário</th>
-                            <th>Qualidade ar</th>
+                            <th>Qualidade do Ar</th>
                             <th>IQA</th>
                             <th>Temperatura</th>
                             <th>Umidade</th>
@@ -31,20 +31,20 @@ export default function Relatorio(){
                     </thead>
                     <tbody>
                         {
-                            leituras.map((item, index) =>(
+                            leituras.map((item,index) =>(
                                 <tr key={index}>
                                     <td>{item.horario}</td>
-                                    <td>{item.qualidade}</td>
+                                    <td>{item.qualidadeAr}</td>
                                     <td>{item.iqa}</td>
                                     <td>{item.temperatura}</td>
                                     <td>{item.umidade}</td>
                                 </tr>
+
                             ))
                         }
                     </tbody>
                 </table>
             </section>
-
         </div>
     )
 }
