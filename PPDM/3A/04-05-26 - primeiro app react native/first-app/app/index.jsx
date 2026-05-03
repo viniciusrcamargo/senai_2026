@@ -3,7 +3,7 @@ import Foto from '../assets/imagem.jpg';
 
 export default function Index() {
   return (
-    <ScrollView>
+    <ScrollView
       <View style={estilos.container}>
         <Text style={estilos.titulo}>My First App</Text>
         <Image source={Foto} style={estilos.imagem} />
