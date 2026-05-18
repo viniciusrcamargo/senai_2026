@@ -3,7 +3,7 @@ import Header from './components/Header';
 import tarefas from './dados/tarefas';
 
 
-function ItemTarefa({ item })  {
+function ItemTarefa({ item }) {
   return (
     <View style={estilos.card}>
       <Image source={item.photo} style={estilos.foto} />
