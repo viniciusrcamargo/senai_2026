@@ -2,15 +2,18 @@ import { useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity, StyleSheet, Image, TextInput } from "react-native";
 import Logo from '../assets/logo.png';
 
+//pause
+
 export default function Index() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-
+//pause
     function Login(){
       console.log('Dados do Login');
       console.log({email, senha});
     }
 
+//pause
   return (
     <ScrollView>
       <Image
@@ -23,8 +26,7 @@ export default function Index() {
   );
 }
 
-
+//pause
 const estilos = StyleSheet.create({
   
 })
-
