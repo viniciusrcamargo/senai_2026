@@ -13,7 +13,8 @@ const estilos = StyleSheet.create({
         backgroundColor: '#1c6ed9',
         paddingVertical: 20,
         paddingHorizontal: 16,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 15
     }, 
     titulo:{
         fontSize: 25,
