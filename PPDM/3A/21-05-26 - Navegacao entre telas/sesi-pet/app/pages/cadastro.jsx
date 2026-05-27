@@ -1,4 +1,4 @@
-import { useState } from "react";
+mport { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 
 export default function Cadastro({ navigation }) {
