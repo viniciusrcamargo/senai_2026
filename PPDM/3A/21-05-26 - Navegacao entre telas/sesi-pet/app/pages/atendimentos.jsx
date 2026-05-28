@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { atendimentos } from '../dados/atendimentos';
 
-export default function AtendimentosScreen() {
+export default function Atendimentos() {
   return (
     <View style={estilos.container}>
-      <Text >Atendimentos</Text>
+      <Text style={estilos.titulo}>Atendimentos</Text>
       <FlatList
         data={atendimentos}
         keyExtractor={(item) => item.id}
@@ -21,24 +21,14 @@ export default function AtendimentosScreen() {
   );
 }
 
-const estiulos = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', padding: 24, backgroundColor: '#FFF8F0' },
-  titulo: { fontSize: 28, fontWeight: 'bold', marginBottom: 24, textAlign: 'center', color: '#8B4513' },
-  input: {
+const estilos = StyleSheet.create({
+  container: { flex: 1, padding: 16, backgroundColor: '#FFF6F2' },
+  titulo: { fontSize: 24, fontWeight: 'bold', marginBottom: 16, color: '#A0522D' },
+  card: {
     backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ddd',
     padding: 14,
     borderRadius: 10,
     marginBottom: 12,
   },
-  botao: {
-    backgroundColor: '#FF914D',
-    padding: 14,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  botaoTexto: { color: '#fff', fontWeight: 'bold', fontSize: 16 },
-  link: { marginTop: 16, textAlign: 'center', color: '#8B4513', fontWeight: '600' },
+  nome: { fontSize: 18, fontWeight: 'bold' },
 });
