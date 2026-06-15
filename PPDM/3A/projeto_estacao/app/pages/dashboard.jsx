@@ -4,7 +4,7 @@ import { LineChart, PieChart } from 'react-native-chart-kit';
 const { width } = Dimensions.get('window');
 
 const chartConfig = {
-  backgroundGradientFrom: "#111111",
+  backgroundGradientFrom: "#11111",
   backgroundGradientFromOpacity: 1,
   backgroundGradientTo: "#111111",
   backgroundGradientToOpacity: 1,
