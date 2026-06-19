@@ -51,6 +51,7 @@ export default function Relatorio(){
                 keyExtractor={(item) => String(item.id)}
                 renderItem={({item}) => <ItemLista item={item}/>}
             />
+            
         </View>
     )
 }
