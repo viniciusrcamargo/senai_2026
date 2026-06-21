@@ -20,7 +20,7 @@ export default function Cadastro() {
     >
       <View style={estilos.formContainer}>
         <View style={estilos.accentBar} />
-        <Text style={estilos.formTitle}>Cadastro de Medicão</Text>
+        <Text style={estilos.formTitle}>Cadastro de Mediçaão</Text>
 
         {/* Temperatura */}
         <View style={estilos.inputWrapper}>
