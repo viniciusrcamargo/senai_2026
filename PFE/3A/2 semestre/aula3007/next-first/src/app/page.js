@@ -3,6 +3,6 @@ import './estilos.css';
 
 export default function Home() {
   return (
-    <HomePage />
+    <HomePag />
   );
 }
