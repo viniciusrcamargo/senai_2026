@@ -6,7 +6,7 @@ export default function Esportes() {
         <>
             <Header />
             <main>
-                <h2>Página de Esportes</h2>
+                <h2>Página de Esporte</h2>
             </main>
             <Footer />
         </>
