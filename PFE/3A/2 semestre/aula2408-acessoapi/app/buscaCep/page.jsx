@@ -30,7 +30,6 @@ export default function BuscaCep(){
                     <p>Rua: {endereco.logradouro}</p>
                     <p>Cidade: {endereco.localidade}</p>
                     <p>UF: {endereco.uf}</p>
-                    <p>Bairro: {endereco.bairro}</p>
                 </div>
             )}
         </>
