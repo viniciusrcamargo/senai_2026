@@ -24,7 +24,7 @@ export default function BuscaCep(){
             <input type="number" value={cep} onChange={(e) => setCep(e.target.value)} placeholder="Digite o cep"/>
             <button onClick={search}>Buscar</button>
 
-            {endereco && (
+            {enderec && (
                 <div>
                     <p>Cep: {endereco.cep}</p>
                     <p>Rua: {endereco.logradouro}</p>
