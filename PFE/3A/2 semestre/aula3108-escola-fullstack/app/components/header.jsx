@@ -1,11 +1,12 @@
 import Link from "next/link";
+import estilos from './header.module.css'
 
 export default function Header(){
     return(
-        <header>
-            <h1>Projeto Escola</h1>
+        <header className={estilos.header}>
+            <h1 className={estilos.title}>Projeto Escola</h1>
             <nav>
-                <ul>
+                <ul className={estilos.menu}>
                     <li><Link href='/'>Início</Link></li>
                     <li><Link href='/cadaluno'>Alunos - Cadastro</Link></li>
                     <li><Link href='/listaluno'>Alunos - Lista</Link></li>

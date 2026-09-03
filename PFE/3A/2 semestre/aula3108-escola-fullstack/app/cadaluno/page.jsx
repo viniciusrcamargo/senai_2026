@@ -1,30 +1,80 @@
 'use client';
+
 import { useState } from "react";
 import Header from "../components/header";
+import styles from "./cadaluno.module.css";
 
-export default function CadAluno(){
+export default function CadAluno() {
     const [nome, setNome] = useState('');
     const [idade, setIdade] = useState('');
     const [serie, setSerie] = useState('');
     const [ra, setRa] = useState('');
-    return(
+
+    return (
         <>
             <Header />
-            <h2>Cadastro de alunos</h2>
-            <form action="">
-                <label htmlFor="nome">Nome</label>
-                <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
 
-                <label htmlFor="idade">Idade</label>
-                <input type="number" value={idade} onChange={(e) => setIdade(e.target.value)} />
+            <main className={styles.container}>
+                <div className={styles.card}>
+                    <h2 className={styles.title}>
+                        Cadastro de Alunos
+                    </h2>
 
-                <label htmlFor="serie">Série</label>
-                <input type="text" value={serie} onChange={(e) => setSerie(e.target.value)} />
+                    <p className={styles.subtitle}>
+                        Preencha os dados do aluno para realizar o cadastro no sistema.
+                    </p>
 
-                <label htmlFor="ra">Ra</label>
-                <input type="number" value={ra} onChange={(e) => setRa(e.target.value)} />
-                <button>Cadastrar</button>
-            </form>
+                    <form className={styles.form}>
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="nome">Nome</label>
+                            <input
+                                id="nome"
+                                type="text"
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                placeholder="Digite o nome do aluno"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="idade">Idade</label>
+                            <input
+                                id="idade"
+                                type="number"
+                                value={idade}
+                                onChange={(e) => setIdade(e.target.value)}
+                                placeholder="Digite a idade"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="serie">Série</label>
+                            <input
+                                id="serie"
+                                type="text"
+                                value={serie}
+                                onChange={(e) => setSerie(e.target.value)}
+                                placeholder="Digite a série"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="ra">RA</label>
+                            <input
+                                id="ra"
+                                type="number"
+                                value={ra}
+                                onChange={(e) => setRa(e.target.value)}
+                                placeholder="Digite o RA"
+                            />
+                        </div>
+
+                        <button className={styles.button} type="submit">
+                            Cadastrar Aluno
+                        </button>
+                    </form>
+                </div>
+            </main>
         </>
-    )
+    );
 }
