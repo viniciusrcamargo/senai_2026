@@ -1,31 +1,28 @@
 import db from "../../db/banco";
 import { NextResponse } from "next/server";
-
-export async function litarAlunos(){
-    const alunos = db.prepare('SELECT * FROM alunos ORDER BY nome')
-    return NextResponse.json(alunos)
+//listar notas ordenando pelo nome
+export async function listNotas(){
+    const notas = db.prepare(`SELECT notas.id, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
+    INNER JOIN alunos
+    ON notas.id_aluno = alunos.id_aluno
+    ORDER BY alunos.nome`).all();
+    return NextResponse.json(notas)
 }
 
-export async function salvarAlunos(request){
+export async function salvaNotas(request){
     try {
-        const dados =  await request.json();
-        const sql = db.prepare(`INSERT INTO alunos (nome, idade, serie, ra) VALUES (?,?,?,?)`)
-        sql.run(
-            dados.nome,
-            dados.idade,
-            dados.serie,
-            dados.ra
-        )
+        const dados = await request.json();
+        const sql = db.prepare(`INSERT INTO notas (id_aluno, t1,t2,n1,n2,n3) VALUES (?,?,?,?,?,?)`);
+        sql.run(dados.id_aluno, dados.t1,dados.t2, dados.n1,dados.n2,dados.n3)
         return NextResponse.json({
-            mensagem: 'Aluno salvo com sucesso!'
-        });
+            mensagem: "Nota cadastrada com sucesso!"
+        })
     } catch (error) {
-        console.error('Erro ao salvar usuário ', error)
+        console.error('Erro ao realizar o cadastro', error)
     }
 }
 
-
-export async function editarAluno(request) {
+export async function editAluno(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`
@@ -43,7 +40,8 @@ export async function editarAluno(request) {
     };
 }
 
-export async function excluirAluno(request) {
+// excluir aluno pelo id_aluno
+export async function excluiAluno(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`DELETE FROM alunos WHERE id_aluno = ?`);
