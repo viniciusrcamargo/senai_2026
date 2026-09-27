@@ -1,12 +1,12 @@
 import db from "../../db/banco";
 import { NextResponse } from "next/server";
 //listar alunos ordenando pelo nome
-export async function listAlunos(){
+export async function GET(){
     const alunos = db.prepare('SELECT * FROM alunos ORDER BY nome').all();
     return NextResponse.json(alunos)
 }
 
-export async function salvaAlunos(request){
+export async function POST(request){
     try {
         const dados = await request.json();
         const sql = db.prepare(`INSERT INTO alunos (nome, idade, serie, ra) VALUES (?,?,?,?)`);
@@ -19,7 +19,7 @@ export async function salvaAlunos(request){
     }
 }
 
-export async function editAluno(request) {
+export async function PUT(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`
@@ -38,7 +38,7 @@ export async function editAluno(request) {
 }
 
 // excluir aluno pelo id_aluno
-export async function excluiAluno(request) {
+export async function DELETE(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`DELETE FROM alunos WHERE id_aluno = ?`);
