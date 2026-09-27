@@ -6,7 +6,7 @@ function odenaIdades(idades){
             if(idades[j] > idades[j + 1]){
                 let temp = idades[j];
                 idades[j] = idades[j+1];
-                idades[j+1] = temp;
+                idades[j+1] = temp
             }
         }
     }
