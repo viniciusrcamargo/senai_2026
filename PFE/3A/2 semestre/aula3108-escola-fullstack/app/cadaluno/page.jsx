@@ -10,6 +10,30 @@ export default function CadAluno() {
     const [serie, setSerie] = useState('');
     const [ra, setRa] = useState('');
 
+    async function cadastrarAluno(evento){
+        evento.preventDefault();
+        const resposta = await fetch("/api/alunos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nome,
+                idade,
+                serie,
+                ra
+            })
+        })
+        const dados = await resposta.json();
+        alert(dados.mensagem || dados.erro);
+        if(resposta.ok){
+            setNome("")
+            setIdade("")
+            setSerie("")
+            setRa("")
+        }
+    }
+
     return (
         <>
             <Header />
@@ -24,7 +48,7 @@ export default function CadAluno() {
                         Preencha os dados do aluno para realizar o cadastro no sistema.
                     </p>
 
-                    <form className={styles.form}>
+                    <form className={styles.form} onSubmit={cadastrarAluno}>
                         <div className={styles.inputGroup}>
                             <label htmlFor="nome">Nome</label>
                             <input
