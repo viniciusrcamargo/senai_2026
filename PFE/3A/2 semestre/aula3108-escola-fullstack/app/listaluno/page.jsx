@@ -39,6 +39,7 @@ export default function ListAluno() {
                                 <th>Idade</th>
                                 <th>Série</th>
                                 <th>RA</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
 
