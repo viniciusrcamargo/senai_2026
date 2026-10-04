@@ -2,8 +2,9 @@ import db from "../../db/banco";
 import { NextResponse } from "next/server";
 
 export async function GET(){
-    const alunos = db.prepare('SELECT * FROM alunos ORDER BY nome')
+    const alunos = db.prepare('SELECT * FROM alunos ORDER BY nome').all()
     return NextResponse.json(alunos)
+    
 }
 
 export async function POST(request){
