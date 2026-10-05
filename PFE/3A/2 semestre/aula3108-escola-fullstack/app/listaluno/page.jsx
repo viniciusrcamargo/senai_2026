@@ -1,9 +1,23 @@
 'use client';
-
+import {useState, useEffect} from 'react';
+// import { useRouter } from 'next/router';
 import Header from "../components/header";
 import styles from "./listaluno.module.css";
 
 export default function ListAluno() {
+    const [alunos, setAlunos] = useState([]);
+    // const router = useRouter();
+    
+    useEffect(() => {
+      buscarAlunos()  
+    }, [])//toda vez que a tela for recarregada
+    
+    async function buscarAlunos(){
+        const resposta = await fetch('/api/alunos');
+        const dados = await resposta.json();
+        setAlunos(dados);
+    }
+
     return (
         <>
             <Header />
@@ -33,7 +47,7 @@ export default function ListAluno() {
 
                     <table className={styles.table}>
                         <thead>
-                            <tr>
+                            <tr >
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>Idade</th>
@@ -44,13 +58,18 @@ export default function ListAluno() {
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Kelvin Destaque</td>
-                                <td>18</td>
-                                <td>3A</td>
-                                <td>232300</td>
-                            </tr>
+                            {
+                                alunos.map((aluno) =>{
+                                    return(
+                                    <tr style={{color:'white', padding: '20px'}}>
+                                        <td>{aluno.id_aluno}</td>
+                                        <td>{aluno.nome}</td>
+                                        <td>{aluno.idade}</td>
+                                        <td>{aluno.serie}</td>
+                                        <td>{aluno.ra}</td>
+                                    </tr>)
+                                })
+                            }
                         </tbody>
                     </table>
 
