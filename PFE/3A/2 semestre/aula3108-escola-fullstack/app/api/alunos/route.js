@@ -41,13 +41,15 @@ export async function PUT(request) {
 export async function DELETE(request) {
     try {
         const dados = await request.json();
+        console.log('dados do aluno ', dados);
+        
         const sql = db.prepare(`DELETE FROM alunos WHERE id_aluno = ?`);
         sql.run(dados.id_aluno);
         return NextResponse.json({
-            message: "Aluno excluído com sucesso!"
+            mensagem: "Aluno excluído com sucesso!"
         });
-    } catch (error) {
-        console.error('Erro ao excluir o aluno ', error);
-        return NextResponse.json({ message: "Erro ao excluir o aluno." }, { status: 500 });
+    } catch (erro) {
+        console.error('Erro ao excluir o aluno ', erro);
+        return NextResponse.json({ erro: 'Erro ao excluir o aluns.' });
     };
 }
