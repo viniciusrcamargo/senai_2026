@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Header from "../components/header";
 import styles from "./cadaluno.module.css";
+import {redirect} from "next/navigation";
 
 export default function CadAluno() {
     const [nome, setNome] = useState('');
     const [idade, setIdade] = useState('');
     const [serie, setSerie] = useState('');
     const [ra, setRa] = useState('');
+
 
     async function cadastrarAluno(evento){
         evento.preventDefault();
@@ -27,10 +29,7 @@ export default function CadAluno() {
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro);
         if(resposta.ok){
-            setNome("")
-            setIdade("")
-            setSerie("")
-            setRa("")
+            redirect("/listaluno")
         }
     }
 
