@@ -29,11 +29,11 @@ export async function PUT(request) {
         `);
         sql.run(dados.nome, dados.idade, dados.serie, dados.ra, dados.id_aluno);
         return NextResponse.json({
-            message: "Aluno atualizado com sucesso!"
+            mensagem: "Aluno atualizado com sucesso!"
         });
-    } catch (error) {
-        console.error('Erro ao editar o aluno ', error);
-        return NextResponse.json({ message: "Erro ao editar o aluno." }, { status: 500 });
+    } catch (erro) {
+        console.error('Erro ao editar o aluno ', erro);
+        return NextResponse.json({ erro: "Erro ao editar o aluno." }, { status: 500 });
     };
 }
 
