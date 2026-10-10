@@ -32,11 +32,11 @@ export async function editAluno(request) {
         `);
         sql.run(dados.nome, dados.idade, dados.serie, dados.ra, dados.id_aluno);
         return NextResponse.json({
-            message: "Aluno atualizado com sucesso!"
+            mensagem: "Aluno atualizado com sucesso!"
         });
     } catch (error) {
         console.error('Erro ao editar o aluno ', error);
-        return NextResponse.json({ message: "Erro ao editar o aluno." }, { status: 500 });
+        return NextResponse.json({ erro: "Erro ao editar o aluno." }, { status: 500 });
     };
 }
 
@@ -47,10 +47,10 @@ export async function excluiAluno(request) {
         const sql = db.prepare(`DELETE FROM alunos WHERE id_aluno = ?`);
         sql.run(dados.id_aluno);
         return NextResponse.json({
-            message: "Aluno excluído com sucesso!"
+            mensagem: "Aluno excluído com sucesso!"
         });
     } catch (error) {
         console.error('Erro ao excluir o aluno ', error);
-        return NextResponse.json({ message: "Erro ao excluir o aluno." }, { status: 500 });
+        return NextResponse.json({ erro: "Erro ao excluir o aluno." }, { status: 500 });
     };
 }
