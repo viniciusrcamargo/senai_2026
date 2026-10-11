@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Header from "../components/header";
 import styles from "./cadaluno.module.css";
+import { redirect } from "next/navigation";
 
 export default function CadAlunos() {
     const [nome, setNome] = useState('');
@@ -27,10 +28,7 @@ export default function CadAlunos() {
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
         if(resposta.ok){
-            setNome('');
-            setIdade('');
-            setSerie('');
-            setRa('');
+           redirect('/listalunos')
         }
     }
 
