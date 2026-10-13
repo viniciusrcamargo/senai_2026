@@ -17,6 +17,23 @@ export default function ListAluno() {
         setAlunos(dados);
     }
 
+    async function excluiraAluno(event){
+        event.preventDefault();
+        if(!confirm('Deseja realmente excluir este aluno?'))return;
+        const resposta = await fetch("/api/alunos",{
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_aluno: event.target.dataset.id
+            })
+        })
+        const dados = await resposta.json();
+        alert(dados.mensagem || dados.erro)
+       buscarAlunos();
+    }
+
 
     return (
         <>
@@ -61,7 +78,7 @@ export default function ListAluno() {
                                             Editar
                                         </button>
 
-                                        <button className={styles.botaoExcluir}>
+                                        <button className={styles.botaoExcluir} onClick={(e) => excluiraAluno(e)} data-id={aluno.id}>
                                             Excluir
                                         </button>
                                     </td>
