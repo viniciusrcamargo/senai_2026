@@ -78,7 +78,7 @@ export default function ListAluno() {
                                             Editar
                                         </button>
 
-                                        <button className={styles.botaoExcluir} onClick={(e) => excluiraAluno(e)} data-id={aluno.id}>
+                                        <button className={styles.botaoExcluir} onClick={(e) => excluiraAluno(e)} data-id={aluno.id_aluno}>
                                             Excluir
                                         </button>
                                     </td>
