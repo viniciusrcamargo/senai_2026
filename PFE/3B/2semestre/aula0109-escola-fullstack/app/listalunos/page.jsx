@@ -2,9 +2,12 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header";
 import styles from './listalunos.module.css';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ListAluno() {
     const [alunos, setAlunos] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         buscarAlunos()
@@ -15,6 +18,10 @@ export default function ListAluno() {
         const dados = await resposta.json();
 
         setAlunos(dados);
+    }
+
+    function editarAlunos(id){
+        router.push(`/editalunos/${id}`)
     }
 
     async function excluiraAluno(event){
@@ -74,7 +81,7 @@ export default function ListAluno() {
                                     <td>{aluno.ra}</td>
 
                                     <td>
-                                        <button className={styles.botaoEditar}>
+                                        <button className={styles.botaoEditar} onClick={() => editarAlunos(aluno.id_aluno)}>
                                             Editar
                                         </button>
 
