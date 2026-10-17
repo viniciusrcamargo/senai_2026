@@ -3,14 +3,21 @@ import {useState, useEffect} from 'react';
 // import { useRouter } from 'next/router';
 import Header from "../components/header";
 import styles from "./listaluno.module.css";
+import { useRouter } from "next/navigation";
 
 export default function ListAluno() {
     const [alunos, setAlunos] = useState([]);
+    const router = useRouter();
     // const router = useRouter();
     
     useEffect(() => {
       buscarAlunos()  
     }, [])//toda vez que a tela for recarregada
+
+    function editarAlunos(id){
+        router.push(`/editaluno/${id}`)
+    }
+
     
     async function buscarAlunos(){
         const resposta = await fetch('/api/alunos');
@@ -91,7 +98,7 @@ export default function ListAluno() {
                                         <td>{aluno.serie}</td>
                                         <td>{aluno.ra}</td>
                                         <td>
-                                            <button>Editar</button>
+                                            <button onClick={() => editarAlunos(aluno.id_aluno)}>Editar</button>
                                             <button onClick={(e) => excluirAlunos(e)} data-id={aluno.id_aluno}>Excluir</button>
                                         </td>
                                     </tr>)
