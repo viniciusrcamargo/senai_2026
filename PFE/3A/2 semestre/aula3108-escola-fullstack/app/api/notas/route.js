@@ -1,7 +1,7 @@
 import db from "../../db/banco";
 import { NextResponse } from "next/server";
 //listar notas ordenando pelo nome
-export async function listNotas(){
+export async function GET(){
     const notas = db.prepare(`SELECT notas.id, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
     INNER JOIN alunos
     ON notas.id_aluno = alunos.id_aluno
@@ -9,7 +9,7 @@ export async function listNotas(){
     return NextResponse.json(notas)
 }
 
-export async function salvaNotas(request){
+export async function POST(request){
     try {
         const dados = await request.json();
         const sql = db.prepare(`INSERT INTO notas (id_aluno, t1,t2,n1,n2,n3) VALUES (?,?,?,?,?,?)`);
@@ -22,7 +22,7 @@ export async function salvaNotas(request){
     }
 }
 
-export async function editAluno(request) {
+export async function PUT(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`
@@ -41,7 +41,7 @@ export async function editAluno(request) {
 }
 
 // excluir aluno pelo id_aluno
-export async function excluiAluno(request) {
+export async function DELETE(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`DELETE FROM alunos WHERE id_aluno = ?`);

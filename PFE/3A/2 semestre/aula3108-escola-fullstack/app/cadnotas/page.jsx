@@ -5,12 +5,12 @@ import Header from "../components/header";
 import styles from "./cadnotas.module.css";
 
 export default function CadNotas() {
-    const [id_aluno, setIdAluno] = useState('');
-    const [trabalho1, setTrabalho1] = useState('');
-    const [trabalho2, setTrabalho2] = useState('');
-    const [nota1, setNota1] = useState('');
-    const [nota2, setNota2] = useState('');
-    const [nota3, setNota3] = useState('');
+    const [aluno_id, setAlunoId] = useState('');
+    const [t1, setT1] = useState('');
+    const [t2, setT2] = useState('');
+    const [n1, setN1] = useState('');
+    const [n2, setN2] = useState('');
+    const [n3, setN3] = useState('');
     const [alunos, setAlunos] = useState([])
 
     useEffect(() => {
@@ -24,31 +24,31 @@ export default function CadNotas() {
     }
 
 
-    async function cadastraAluno(event) {
+    async function cadastraNotas(event) {
         event.preventDefault();
-        const resposta = await fetch("/api/alunos", {
+        const resposta = await fetch("/api/notas", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                id_aluno,
-                trabalho1,
-                trabalho2,
-                nota1,
-                nota2,
-                nota3
+                aluno_id,
+                t1,
+                t2,
+                n1,
+                n2,
+                n3
             })
         })
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
         if (resposta.ok) {
-            setIdAluno('');
-            setTrabalho1('');
-            setTrabalho2('');
-            setNota1('');
-            setNota2('');
-            setNota3('');
+            setAlunoId('');
+            setT1('');
+            setT2('');
+            setN1('');
+            setN2('');
+            setN3('');
         }
     }
 
@@ -65,12 +65,12 @@ export default function CadNotas() {
 
                         <h2>Cadastro de Notas</h2>
 
-                        <form className={styles.form} onSubmit={cadastraAluno}>
+                        <form className={styles.form} onSubmit={cadastraNotas}>
                             <div className={styles.campo}>
-                                <label htmlFor="id_aluno">ID do Aluno</label>
+                                <label htmlFor="aluno_id">ID do Aluno</label>
                                 <select
-                                    value={id_aluno}
-                                    onChange={(event) => setIdAluno(event.target.value)}
+                                    value={aluno_id}
+                                    onChange={(event) => setAlunoId(event.target.value)}
                                     required
                                 >
                                     <option value="">Selecione um aluno</option>
@@ -88,8 +88,8 @@ export default function CadNotas() {
                                 <input
                                     id="trabalho1"
                                     type="text"
-                                    value={trabalho1}
-                                    onChange={(e) => setTrabalho1(e.target.value)}
+                                    value={t1}
+                                    onChange={(e) => setT1(e.target.value)}
                                 />
                             </div>
 
@@ -98,8 +98,8 @@ export default function CadNotas() {
                                 <input
                                     id="trabalho2"
                                     type="text"
-                                    value={trabalho2}
-                                    onChange={(e) => setTrabalho2(e.target.value)}
+                                    value={t2}
+                                    onChange={(e) => setT2(e.target.value)}
                                 />
                             </div>
 
@@ -108,8 +108,8 @@ export default function CadNotas() {
                                 <input
                                     id="nota1"
                                     type="number"
-                                    value={nota1}
-                                    onChange={(e) => setNota1(e.target.value)}
+                                    value={n1}
+                                    onChange={(e) => setN1(e.target.value)}
                                 />
                             </div>
                             <div className={styles.campo}>
@@ -117,8 +117,8 @@ export default function CadNotas() {
                                 <input
                                     id="nota2"
                                     type="number"
-                                    value={nota2}
-                                    onChange={(e) => setNota2(e.target.value)}
+                                    value={n2}
+                                    onChange={(e) => setN2(e.target.value)}
                                 />
                             </div>
                             <div className={styles.campo}>
@@ -126,8 +126,8 @@ export default function CadNotas() {
                                 <input
                                     id="nota3"
                                     type="number"
-                                    value={nota3}
-                                    onChange={(e) => setNota3(e.target.value)}
+                                    value={n3}
+                                    onChange={(e) => setN3(e.target.value)}
                                 />
                             </div>
 
