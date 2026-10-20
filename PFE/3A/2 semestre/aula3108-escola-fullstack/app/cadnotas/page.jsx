@@ -3,9 +3,10 @@
 import { useState, useEffect, use } from "react";
 import Header from "../components/header";
 import styles from "./cadnotas.module.css";
+import { redirect } from "next/navigation";
 
 export default function CadNotas() {
-    const [aluno_id, setAlunoId] = useState('');
+    const [id_aluno, setIdAluno] = useState('');
     const [t1, setT1] = useState('');
     const [t2, setT2] = useState('');
     const [n1, setN1] = useState('');
@@ -32,7 +33,7 @@ export default function CadNotas() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                aluno_id,
+                id_aluno,
                 t1,
                 t2,
                 n1,
@@ -43,12 +44,7 @@ export default function CadNotas() {
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
         if (resposta.ok) {
-            setAlunoId('');
-            setT1('');
-            setT2('');
-            setN1('');
-            setN2('');
-            setN3('');
+            redirect("/listnotas")
         }
     }
 
@@ -67,10 +63,10 @@ export default function CadNotas() {
 
                         <form className={styles.form} onSubmit={cadastraNotas}>
                             <div className={styles.campo}>
-                                <label htmlFor="aluno_id">ID do Aluno</label>
+                                <label htmlFor="id_aluno">ID do Aluno</label>
                                 <select
-                                    value={aluno_id}
-                                    onChange={(event) => setAlunoId(event.target.value)}
+                                    value={id_aluno}
+                                    onChange={(event) => setIdAluno(event.target.value)}
                                     required
                                 >
                                     <option value="">Selecione um aluno</option>

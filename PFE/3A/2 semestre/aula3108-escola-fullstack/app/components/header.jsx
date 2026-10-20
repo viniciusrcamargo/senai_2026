@@ -10,8 +10,8 @@ export default function Header(){
                     <li><Link href='/'>Início</Link></li>
                     <li><Link href='/cadaluno'>Alunos - Cadastro</Link></li>
                     <li><Link href='/listaluno'>Alunos - Lista</Link></li>
-                    <li><Link href='/cadnotas'>Alunos - Cadastro de Notas</Link></li>
-                    <li><Link href='/listnotas'>Alunos - Lista de Notas</Link></li>
+                    <li><Link href='/cadnotas'>Cadastro de Notas</Link></li>
+                    <li><Link href='/listnotas'>Lista de Notas</Link></li>
                 </ul>
             </nav>
         </header>

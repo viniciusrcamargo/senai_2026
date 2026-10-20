@@ -1,8 +1,9 @@
 import db from "../../db/banco";
 import { NextResponse } from "next/server";
+
 //listar notas ordenando pelo nome
 export async function GET(){
-    const notas = db.prepare(`SELECT notas.id, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
+    const notas = db.prepare(`SELECT notas.id_nota, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
     INNER JOIN alunos
     ON notas.id_aluno = alunos.id_aluno
     ORDER BY alunos.nome`).all();
@@ -19,6 +20,7 @@ export async function POST(request){
         })
     } catch (error) {
         console.error('Erro ao realizar o cadastro', error)
+        return NextResponse.json({ erro: "Erro ao realizar o cadastro." + error.message }, { status: 500 });
     }
 }
 
@@ -40,17 +42,16 @@ export async function PUT(request) {
     };
 }
 
-// excluir aluno pelo id_aluno
 export async function DELETE(request) {
     try {
         const dados = await request.json();
-        const sql = db.prepare(`DELETE FROM alunos WHERE id_aluno = ?`);
-        sql.run(dados.id_aluno);
+        const sql = db.prepare(`DELETE FROM notas WHERE id_nota = ?`);
+        sql.run(dados.id_nota);
         return NextResponse.json({
-            mensagem: "Aluno excluído com sucesso!"
+            mensagem: "Nota excluída com sucesso!"
         });
     } catch (error) {
-        console.error('Erro ao excluir o aluno ', error);
-        return NextResponse.json({ erro: "Erro ao excluir o aluno." }, { status: 500 });
+        console.error('Erro ao excluir a nota ', error);
+        return NextResponse.json({ erro: "Erro ao excluir a nota." + error.message }, { status: 500 });
     };
 }
