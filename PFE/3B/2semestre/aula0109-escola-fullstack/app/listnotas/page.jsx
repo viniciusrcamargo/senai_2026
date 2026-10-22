@@ -68,11 +68,11 @@ export default function ListNotas() {
                             <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
-                                    <th>T1</th>
-                                    <th>T2</th>
-                                    <th>N1</th>
-                                    <th>N2</th>
-                                    <th>N3</th>
+                                    <th>Trabalho1</th>
+                                    <th>Trabalho2</th>
+                                    <th>Nota1</th>
+                                    <th>Nota2</th>
+                                    <th>Nota3</th>
                                     <th>Ações</th>
                             </tr>
                         </thead>
