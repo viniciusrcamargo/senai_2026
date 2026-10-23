@@ -28,17 +28,18 @@ export async function PUT(request) {
     try {
         const dados = await request.json();
         const sql = db.prepare(`
-            UPDATE alunos
-            SET nome = ?, idade = ?, serie = ?, ra = ?
-            WHERE id_aluno = ?
+            UPDATE notas
+            SET t1 = ?, t2 = ?, n1 = ?, n2 = ?, n3 = ?
+            WHERE id_nota = ?
+            
         `);
-        sql.run(dados.nome, dados.idade, dados.serie, dados.ra, dados.id_aluno);
+        sql.run(dados.t1, dados.t2, dados.n1, dados.n2, dados.n3, dados.id_nota);
         return NextResponse.json({
-            mensagem: "Aluno atualizado com sucesso!"
+            mensagem: "Nota atualizada com sucesso!"
         });
     } catch (error) {
-        console.error('Erro ao editar o aluno ', error);
-        return NextResponse.json({ erro: "Erro ao editar o aluno." }, { status: 500 });
+        console.error('Erro ao editar a nota ', error);
+        return NextResponse.json({ erro: "Erro ao editar a nota." + error.message }, { status: 500 });
     };
 }
 

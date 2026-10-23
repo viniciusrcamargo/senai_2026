@@ -1,42 +1,49 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/header";
 import styles from "./cadnotas.module.css";
 
 export default function CadNotas() {
-    const [id_aluno, setIdAluno] = useState('');
-    const [trabalho1, setTrabalho1] = useState('');
-    const [trabalho2, setTrabalho2] = useState('');
-    const [nota1, setNota1] = useState('');
-    const [nota2, setNota2] = useState('');
-    const [nota3, setNota3] = useState('');
+     const [id_aluno, setIdAluno] = useState('');
+    const [t1, setT1] = useState('');
+    const [t2, setT2] = useState('');
+    const [n1, setN1] = useState('');
+    const [n2, setN2] = useState('');
+    const [n3, setN3] = useState('');
+    const [alunos, setAlunos] = useState([])
 
-    async function cadastraAluno(event){
+    useEffect(() => {
+        buscarAlunos();
+    }, []);
+
+    async function buscarAlunos() {
+        const resposta = await fetch("/api/alunos");
+        const dados = await resposta.json();
+        setAlunos(dados);
+    }
+
+
+    async function cadastraNotas(event) {
         event.preventDefault();
-        const resposta = await fetch("/api/alunos",{
+        const resposta = await fetch("/api/notas", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 id_aluno,
-                trabalho1,
-                trabalho2,
-                nota1,
-                nota2,
-                nota3
+                t1,
+                t2,
+                n1,
+                n2,
+                n3
             })
         })
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
-        if(resposta.ok){
-            setIdAluno('');
-            setTrabalho1('');
-            setTrabalho2('');
-            setNota1('');
-            setNota2('');
-            setNota3('');
+        if (resposta.ok) {
+            redirect("/listnotas")
         }
     }
 
@@ -53,62 +60,69 @@ export default function CadNotas() {
 
                         <h2>Cadastro de Notas</h2>
 
-                        <form className={styles.form} onSubmit={cadastraAluno}>
+                        <form className={styles.form} onSubmit={cadastraNotas}>
                             <div className={styles.campo}>
                                 <label htmlFor="id_aluno">ID do Aluno</label>
-                                <input
-                                    id="id_aluno"
-                                    type="text"
+                                <select
                                     value={id_aluno}
-                                    onChange={(e) => setIdAluno(e.target.value)}
-                                />
+                                    onChange={(event) => setIdAluno(event.target.value)}
+                                    required
+                                >
+                                    <option value="">Selecione um aluno</option>
+
+                                    {alunos.map((aluno) => (
+                                        <option key={aluno.id_aluno} value={aluno.id_aluno}>
+                                            {aluno.nome} - RA {aluno.ra}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className={styles.campo}>
-                                <label htmlFor="trabalho1">Trabalho 1</label>
+                                <label htmlFor="t1">Trabalho 1</label>
                                 <input
-                                    id="trabalho1"
+                                    id="t1"
                                     type="text"
-                                    value={trabalho1}
-                                    onChange={(e) => setTrabalho1(e.target.value)}
+                                    value={t1}
+                                    onChange={(e) => setT1(e.target.value)}
                                 />
                             </div>
 
                             <div className={styles.campo}>
-                                <label htmlFor="trabalho2">Trabalho 2</label>
+                                <label htmlFor="t2">Trabalho 2</label>
                                 <input
-                                    id="trabalho2"
+                                    id="t2"
                                     type="text"
-                                    value={trabalho2}
-                                    onChange={(e) => setTrabalho2(e.target.value)}
+                                    value={t2}
+                                    onChange={(e) => setT2(e.target.value)}
                                 />
                             </div>
 
                             <div className={styles.campo}>
-                                <label htmlFor="nota1">Nota 1</label>
+                                <label htmlFor="n1">Nota 1</label>
                                 <input
-                                    id="nota1"
+                                    id="n1"
                                     type="number"
-                                    value={nota1}
-                                    onChange={(e) => setNota1(e.target.value)}
+                                    value={n1}
+                                    onChange={(e) => setN1(e.target.value)}
                                 />
                             </div>
                             <div className={styles.campo}>
-                                <label htmlFor="nota2">Nota 2</label>
+                                <label htmlFor="n2">Nota 2</label>
                                 <input
-                                    id="nota2"
+                                    id="n2"
                                     type="number"
-                                    value={nota2}
-                                    onChange={(e) => setNota2(e.target.value)}
+                                    value={n2}
+                                    onChange={(e) => setN2(e.target.value)}
                                 />
                             </div>
                             <div className={styles.campo}>
-                                <label htmlFor="nota3">Nota 3</label>
+                                <label htmlFor="n3">Nota 3</label>
                                 <input
-                                    id="nota3"
+                                    id="n3"
                                     type="number"
-                                    value={nota3}
-                                    onChange={(e) => setNota3(e.target.value)}
+                                    value={n3}
+                                    onChange={(e) => setN3(e.target.value)}
                                 />
                             </div>
 
