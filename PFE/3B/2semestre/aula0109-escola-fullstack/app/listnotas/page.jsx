@@ -34,7 +34,7 @@ export default function ListNotas() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                id_nota: event.target.dataset.id,
+                id_notas: event.target.dataset.id,
             }),
         });
 
@@ -91,7 +91,7 @@ export default function ListNotas() {
                                             Editar
                                         </button>
 
-                                        <button className={styles.botaoExcluir} data-id={nota.id_nota} onClick={excluirNota}>
+                                        <button className={styles.botaoExcluir} data-id={nota.id_notas} onClick={excluirNota}>
                                             Excluir
                                         </button>
                                     </td>
