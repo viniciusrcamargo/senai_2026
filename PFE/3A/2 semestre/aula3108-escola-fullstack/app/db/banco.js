@@ -12,6 +12,14 @@ db.exec(`
         serie TEXT NOT NULL,
         ra TEXT NOT NULL UNIQUE
     ) ;   
+     
+    CREATE TABLE IF NOT EXISTS usuario (
+        id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        login INTEGER NOT NULL UNIQUE,
+        senha TEXT NOT NULL
+    ) ;   
+
     CREATE TABLE IF NOT EXISTS notas (
         id_nota INTEGER PRIMARY KEY AUTOINCREMENT,
        id_aluno INTEGER NOT NULL UNIQUE,
