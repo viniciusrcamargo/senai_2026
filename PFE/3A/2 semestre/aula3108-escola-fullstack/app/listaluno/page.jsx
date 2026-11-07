@@ -83,6 +83,7 @@ export default function ListAluno() {
                                 <th>Idade</th>
                                 <th>Série</th>
                                 <th>RA</th>
+                                <th>CPF</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -97,6 +98,7 @@ export default function ListAluno() {
                                         <td>{aluno.idade}</td>
                                         <td>{aluno.serie}</td>
                                         <td>{aluno.ra}</td>
+                                        <td>{aluno.cpf}</td>
                                         <td>
                                             <button onClick={() => editarAlunos(aluno.id_aluno)}>Editar</button>
                                             <button onClick={(e) => excluirAlunos(e)} data-id={aluno.id_aluno}>Excluir</button>

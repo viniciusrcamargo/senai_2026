@@ -1,13 +1,17 @@
 import { NextResponse } from "next/server";
 import db from "../../../db/banco";
+import { exigirAutenticacao } from "../../../lib/auth";
 
 export async function GET(request, { params }) {
+  const respostaAuth = exigirAutenticacao(request);
+  if (respostaAuth) return respostaAuth;
+
   try {
     const resolvedParams = await params;
     const id = resolvedParams?.id;
 
     const nota = db
-      .prepare(`SELECT notas.id_nota, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
+      .prepare(`SELECT notas.id_nota, notas.data, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
         INNER JOIN alunos
         ON notas.id_aluno = alunos.id_aluno
         WHERE notas.id_nota = ?`)

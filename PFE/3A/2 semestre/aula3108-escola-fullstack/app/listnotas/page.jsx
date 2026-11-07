@@ -70,6 +70,7 @@ export default function ListNotas() {
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>RA</th>
+                                <th>Data</th>
                                 <th>T1</th>
                                 <th>T2</th>
                                 <th>N1</th>
@@ -85,6 +86,7 @@ export default function ListNotas() {
                                     <td>{nota.id_nota}</td>
                                     <td>{nota.nome}</td>
                                     <td>{nota.ra}</td>
+                                    <td>{nota.data}</td>
                                     <td>{nota.t1}</td>
                                     <td>{nota.t2}</td>
                                     <td>{nota.n1}</td>

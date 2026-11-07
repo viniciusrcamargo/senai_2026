@@ -1,5 +1,26 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Como funciona o login
+
+1. A tela de registro envia nome, usuário e senha para `POST /api/registro`.
+2. A API transforma a senha em um hash com `bcryptjs` antes de salvar a conta no SQLite.
+3. A tela de login envia usuário e senha para `POST /api/login`. A API compara a senha com o hash salvo.
+4. Quando os dados estão corretos, o servidor cria uma sessão de 7 dias no banco e envia seu identificador em um cookie `HttpOnly`.
+5. A aplicação consulta `GET /api/auth/session` para liberar as páginas. As APIs de alunos e notas também verificam a sessão.
+6. O botão **Sair** chama `POST /api/auth/logout`, que apaga a sessão e o cookie.
+
+Para demonstrar, inicie o projeto com `npm run dev`, crie uma conta em `/registro` com uma senha de pelo menos 8 caracteres e entre em `/login`. O banco converte a coluna de usuário antiga para texto preservando os registros; senhas antigas em texto puro são atualizadas para hash quando o usuário entra corretamente pela primeira vez.
+
+## Criptografia do CPF
+
+O CPF é validado no servidor e criptografado com AES-256-GCM antes de ser gravado no SQLite. Configure uma chave secreta de 32 bytes em Base64 no arquivo `.env.local` antes de cadastrar ou consultar CPFs:
+
+```powershell
+node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
+```
+
+Copie o valor gerado para `.env.local` no formato `CPF_ENCRYPTION_KEY=valor-gerado` e reinicie o servidor. O arquivo `.env.local` já é ignorado pelo Git. Guarde essa chave com segurança e use sempre a mesma: sem ela, os CPFs já gravados não podem ser descriptografados.
+
 ## Getting Started
 
 First, run the development server:

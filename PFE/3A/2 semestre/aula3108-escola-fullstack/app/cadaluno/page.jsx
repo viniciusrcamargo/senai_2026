@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Header from "../components/header";
 import styles from "./cadaluno.module.css";
-import {redirect} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function CadAluno() {
+    const router = useRouter();
     const [nome, setNome] = useState('');
     const [idade, setIdade] = useState('');
     const [serie, setSerie] = useState('');
     const [ra, setRa] = useState('');
+    const [cpf, setCpf] = useState('');
 
 
     async function cadastrarAluno(evento){
@@ -23,13 +25,14 @@ export default function CadAluno() {
                 nome,
                 idade,
                 serie,
-                ra
+                ra,
+                cpf
             })
         })
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro);
         if(resposta.ok){
-            redirect("/listaluno")
+            router.push("/listaluno")
         }
     }
 
@@ -89,6 +92,20 @@ export default function CadAluno() {
                                 value={ra}
                                 onChange={(e) => setRa(e.target.value)}
                                 placeholder="Digite o RA"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="cpf">CPF</label>
+                            <input
+                                id="cpf"
+                                type="text"
+                                inputMode="numeric"
+                                value={cpf}
+                                onChange={(e) => setCpf(e.target.value.replace(/\D/g, '').slice(0, 11))}
+                                placeholder="Digite os 11 números do CPF"
+                                maxLength={11}
+                                required
                             />
                         </div>
 

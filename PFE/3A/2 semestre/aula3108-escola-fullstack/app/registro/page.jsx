@@ -2,12 +2,42 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styles from './registro.module.css';
 
 export default function Registro() {
+    const router = useRouter();
     const [usuario, setUsuario] = useState('');
     const [nome, setNome] = useState('');
     const [senha, setSenha] = useState('');
+    const [erro, setErro] = useState('');
+    const [carregando, setCarregando] = useState(false);
+
+    async function cadastrar(evento) {
+        evento.preventDefault();
+        setErro('');
+        setCarregando(true);
+
+        try {
+            const resposta = await fetch('/api/registro', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome, usuario, senha }),
+            });
+            const dados = await resposta.json();
+
+            if (!resposta.ok) {
+                setErro(dados.erro || 'Não foi possível criar a conta.');
+                return;
+            }
+
+            router.push('/login');
+        } catch {
+            setErro('Não foi possível conectar ao servidor. Tente novamente.');
+        } finally {
+            setCarregando(false);
+        }
+    }
 
     return (
         <main className={styles.main}>
@@ -19,8 +49,7 @@ export default function Registro() {
                 </div>
 
                 <form
-                    action="/api/registro"
-                    method="POST"
+                    onSubmit={cadastrar}
                     className={styles.formulario}
                 >
                     <div className={styles.grupo}>
@@ -32,6 +61,7 @@ export default function Registro() {
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
                             placeholder="Digite seu nome completo"
+                            required
                         />
                     </div>
 
@@ -41,9 +71,11 @@ export default function Registro() {
                             type="text"
                             id="usuario"
                             name="usuario"
+                            autoComplete="username"
                             value={usuario}
                             onChange={(e) => setUsuario(e.target.value)}
                             placeholder="Escolha um usuário"
+                            required
                         />
                     </div>
 
@@ -53,17 +85,23 @@ export default function Registro() {
                             type="password"
                             id="senha"
                             name="senha"
+                            autoComplete="new-password"
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
                             placeholder="Crie uma senha"
+                            minLength={8}
+                            required
                         />
                     </div>
+
+                    {erro && <p role="alert">{erro}</p>}
 
                     <button
                         type="submit"
                         className={styles.botao}
+                        disabled={carregando}
                     >
-                        Registrar
+                        {carregando ? 'Registrando...' : 'Registrar'}
                     </button>
                 </form>
 

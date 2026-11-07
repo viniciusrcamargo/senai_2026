@@ -21,6 +21,7 @@ export default function EditAlunoPage({ params: paramsPromise }) {
     const [idade, setIdade] = useState("");
     const [serie, setSerie] = useState("");
     const [ra, setRa] = useState("");
+    const [cpf, setCpf] = useState("");
     const [carregando, setCarregando] = useState(true);
 
 
@@ -49,6 +50,7 @@ export default function EditAlunoPage({ params: paramsPromise }) {
             setIdade(dados.idade || "");
             setSerie(dados.serie || "");
             setRa(dados.ra || "");
+            setCpf(dados.cpf || "");
         } catch (erro) {
             console.error("Erro ao carregar aluno:", erro);
             alert("Erro ao carregar dados do aluno.");
@@ -76,6 +78,7 @@ export default function EditAlunoPage({ params: paramsPromise }) {
                 idade,
                 serie,
                 ra,
+                cpf,
             }),
         });
 
@@ -156,6 +159,20 @@ export default function EditAlunoPage({ params: paramsPromise }) {
                                 value={ra}
                                 onChange={(e) => setRa(e.target.value)}
                                 placeholder="Digite o RA"
+                            />
+                        </div>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="cpf">CPF</label>
+                            <input
+                                id="cpf"
+                                type="text"
+                                inputMode="numeric"
+                                value={cpf}
+                                onChange={(e) => setCpf(e.target.value.replace(/\D/g, '').slice(0, 11))}
+                                placeholder="Digite os 11 números do CPF"
+                                maxLength={11}
+                                required
                             />
                         </div>
 

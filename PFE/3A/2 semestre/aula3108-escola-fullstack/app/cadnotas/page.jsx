@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/header";
 import styles from "./cadnotas.module.css";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function CadNotas() {
+    const router = useRouter();
     const [id_aluno, setIdAluno] = useState('');
+    const [data, setData] = useState('');
     const [t1, setT1] = useState('');
     const [t2, setT2] = useState('');
     const [n1, setN1] = useState('');
@@ -34,6 +36,7 @@ export default function CadNotas() {
             },
             body: JSON.stringify({
                 id_aluno,
+                data,
                 t1,
                 t2,
                 n1,
@@ -44,7 +47,7 @@ export default function CadNotas() {
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
         if (resposta.ok) {
-            redirect("/listnotas")
+            router.push("/listnotas")
         }
     }
 
@@ -77,6 +80,17 @@ export default function CadNotas() {
                                         </option>
                                     ))}
                                 </select>
+                            </div>
+
+                            <div className={styles.campo}>
+                                <label htmlFor="data">Data da avaliação</label>
+                                <input
+                                    id="data"
+                                    type="date"
+                                    value={data}
+                                    onChange={(event) => setData(event.target.value)}
+                                    required
+                                />
                             </div>
 
                             <div className={styles.campo}>

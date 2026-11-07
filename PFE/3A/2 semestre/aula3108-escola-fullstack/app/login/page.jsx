@@ -2,11 +2,44 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styles from './login.module.css';
 
 export default function Login() {
+  const router = useRouter();
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
+  const [mensagem, setMensagem] = useState('');
+  const [erro, setErro] = useState('');
+  const [carregando, setCarregando] = useState(false);
+
+  async function entrar(evento) {
+    evento.preventDefault();
+    setErro('');
+    setMensagem('');
+    setCarregando(true);
+
+    try {
+      const resposta = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, senha }),
+      });
+      const dados = await resposta.json();
+
+      if (!resposta.ok) {
+        setErro(dados.erro || 'Não foi possível realizar o login.');
+        return;
+      }
+
+      router.replace('/');
+      router.refresh();
+    } catch {
+      setErro('Não foi possível conectar ao servidor. Tente novamente.');
+    } finally {
+      setCarregando(false);
+    }
+  }
 
   return (
     <main className={styles.main}>
@@ -18,8 +51,7 @@ export default function Login() {
         </div>
 
         <form
-          action="/api/login"
-          method="POST"
+          onSubmit={entrar}
           className={styles.formulario}
         >
           <div className={styles.grupo}>
@@ -28,9 +60,11 @@ export default function Login() {
               type="text"
               id="usuario"
               name="usuario"
+              autoComplete="username"
               value={usuario}
               onChange={(e) => setUsuario(e.target.value)}
               placeholder="Digite seu usuário"
+              required
             />
           </div>
 
@@ -40,14 +74,19 @@ export default function Login() {
               type="password"
               id="senha"
               name="senha"
+              autoComplete="current-password"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               placeholder="Digite sua senha"
+              required
             />
           </div>
 
-          <button type="submit" className={styles.botao}>
-            Entrar
+          {mensagem && <p role="status">{mensagem}</p>}
+          {erro && <p role="alert">{erro}</p>}
+
+          <button type="submit" className={styles.botao} disabled={carregando}>
+            {carregando ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
 

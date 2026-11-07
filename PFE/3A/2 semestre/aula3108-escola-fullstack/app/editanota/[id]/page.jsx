@@ -17,6 +17,7 @@ export default function EditaNotaPage({ params: paramsPromise }) {
     const id = resolvedParams?.id || routeParams?.id || searchParams?.get("id");
 
     const [id_nota, setIdNota] = useState("")
+    const [data, setData] = useState("");
     const [t1, setT1] = useState("");
     const [t2, setT2] = useState("");
     const [n1, setN1] = useState("");
@@ -46,6 +47,7 @@ export default function EditaNotaPage({ params: paramsPromise }) {
 
             const dados = await resposta.json();
             setIdNota(dados.id_nota || "");
+            setData(dados.data || "");
             setT1(dados.t1 || "");
             setT2(dados.t2 || "");
             setN1(dados.n1 || "");
@@ -74,6 +76,7 @@ export default function EditaNotaPage({ params: paramsPromise }) {
             },
             body: JSON.stringify({
                 id_nota,
+                data,
                 t1,
                 t2,
                 n1,
@@ -117,6 +120,17 @@ export default function EditaNotaPage({ params: paramsPromise }) {
 
                     <form className={styles.form} onSubmit={editarNota}>
                           <input type="text" value={id_nota} onChange={(event) => setIdNota(event.target.value)} hidden/>
+
+                        <div className={styles.inputGroup}>
+                            <label htmlFor="data">Data da avaliação</label>
+                            <input
+                                id="data"
+                                type="date"
+                                value={data}
+                                onChange={(e) => setData(e.target.value)}
+                                required
+                            />
+                        </div>
 
                         <div className={styles.inputGroup}>
                             <label htmlFor="t1">T1</label>
