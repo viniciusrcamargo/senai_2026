@@ -10,6 +10,7 @@ export default function CadAlunos() {
     const [idade, setIdade] = useState('');
     const [serie, setSerie] = useState('');
     const [ra, setRa] = useState('');
+    const [cpf, setCpf] = useState('');
 
     async function cadastraAluno(event){
         event.preventDefault();
@@ -22,9 +23,11 @@ export default function CadAlunos() {
                 nome,
                 idade,
                 serie,
-                ra
+                ra,
+                cpf
             })
         })
+
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
         if(resposta.ok){
@@ -85,6 +88,18 @@ export default function CadAlunos() {
                                     onChange={(e) => setRa(e.target.value)}
                                 />
                             </div>
+                            <div className={styles.campo}>
+                                <label htmlFor="cpf">CPF</label>
+                                <input
+                                id="cpf"
+                                type="text"
+                                inputMode="numeric"
+                                value={cpf}
+                                onChange={(e) => setCpf(e.target.value.replace(/\D/g, '').slice(0, 11))}
+                                placeholder="Digite os 11 números do CPF"
+                                maxLength={11}
+                                required/>
+                            </div>  
 
                             <button
                                 type="submit"

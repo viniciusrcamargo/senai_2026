@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./header.module.css";
+import LogoutButton from './logout-button';
 
 export default function Header() {
     return (
@@ -13,6 +14,7 @@ export default function Header() {
                         <li><Link href='/listalunos'>Lista - Alunos</Link></li>
                         <li><Link href='/cadnotas'>Cadastro - Notas</Link></li>
                         <li><Link href='/listnotas'>Lista - Notas</Link></li>
+                        <LogoutButton />
                     </ul>
                 </nav>
             </header>

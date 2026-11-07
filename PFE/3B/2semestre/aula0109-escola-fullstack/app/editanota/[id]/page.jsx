@@ -17,6 +17,7 @@ export default function EditaNotaPage({ params: paramsPromise }) {
     const id = resolvedParams?.id || routeParams?.id || searchParams?.get("id");
 
     const [id_notas, setIdNota] = useState("")
+    const [data, setData] = useState("");
     const [t1, setT1] = useState("");
     const [t2, setT2] = useState("");
     const [n1, setN1] = useState("");
@@ -46,6 +47,7 @@ export default function EditaNotaPage({ params: paramsPromise }) {
 
             const dados = await resposta.json();
             setIdNota(dados.id_notas || "");
+            setData(dados.data || "");
             setT1(dados.t1 || "");
             setT2(dados.t2 || "");
             setN1(dados.n1 || "");
@@ -74,6 +76,7 @@ export default function EditaNotaPage({ params: paramsPromise }) {
             },
             body: JSON.stringify({
                 id_notas,
+                data,
                 t1,
                 t2,
                 n1,
@@ -93,10 +96,15 @@ export default function EditaNotaPage({ params: paramsPromise }) {
 
     if (carregando) {
         return (
-            <main className="container">
-                <h1>Editar Nota</h1>
-                <p>Carregando informações da nota...</p>
-            </main>
+            <>
+                <Header />
+                <main className={styles.container}>
+                    <div className={styles.card}>
+                        <h2 className={styles.title}>Editar nota</h2>
+                        <p className={styles.subtitle}>Carregando informações da nota...</p>
+                    </div>
+                </main>
+            </>
         );
     }
 
@@ -119,6 +127,17 @@ export default function EditaNotaPage({ params: paramsPromise }) {
                           <input type="text" value={id_notas} onChange={(event) => setIdNota(event.target.value)} hidden/>
 
                         <div className={styles.inputGroup}>
+                              <label htmlFor="data">Data</label>
+                              <input
+                                  id="data"
+                                  type="date"
+                                  value={data}
+                                  onChange={(event) => setData(event.target.value)}
+                                  required
+                              />
+                          </div>
+
+                          <div className={styles.inputGroup}>
                             <label htmlFor="t1">T1</label>
                             <input
                                 id="t1"

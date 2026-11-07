@@ -68,6 +68,7 @@ export default function ListNotas() {
                             <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Data</th>
                                     <th>Trabalho1</th>
                                     <th>Trabalho2</th>
                                     <th>Nota1</th>
@@ -82,6 +83,7 @@ export default function ListNotas() {
                                 <tr key={nota.id_notas}>
                                     <td>{nota.id_notas}</td>
                                     <td>{nota.nome}</td>
+                                    <td>{nota.data ? new Date(`${nota.data}T00:00:00`).toLocaleDateString("pt-BR") : "—"}</td>
                                     <td>{nota.t1}</td>
                                     <td>{nota.t2}</td>
                                     <td>{nota.n1}</td>

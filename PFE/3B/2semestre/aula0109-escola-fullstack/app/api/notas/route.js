@@ -1,9 +1,23 @@
 import db from "../../db/banco";
 import { NextResponse } from "next/server";
+import { exigirAutenticacao } from "../../lib/auth";
+
+function dataValida(data) {
+    if (typeof data !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+        return false;
+    }
+
+    const dataConvertida = new Date(`${data}T00:00:00.000Z`);
+    return !Number.isNaN(dataConvertida.getTime())
+        && dataConvertida.toISOString().slice(0, 10) === data;
+}
 
 //listar notas ordenando pelo nome
-export async function GET(){
-    const notas = db.prepare(`SELECT notas.id_notas, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
+export async function GET(request){
+    const erroAutenticacao = exigirAutenticacao(request);
+    if (erroAutenticacao) return erroAutenticacao;
+
+    const notas = db.prepare(`SELECT notas.id_notas, notas.data, notas.t1, notas.t2, notas.n1, notas.n2, notas.n3, alunos.nome, alunos.ra FROM notas 
     INNER JOIN alunos
     ON notas.aluno_id = alunos.id_aluno
     ORDER BY alunos.nome`).all();
@@ -11,10 +25,31 @@ export async function GET(){
 }
 
 export async function POST(request){
+    const erroAutenticacao = exigirAutenticacao(request);
+    if (erroAutenticacao) return erroAutenticacao;
+
     try {
         const dados = await request.json();
-        const sql = db.prepare(`INSERT INTO notas (aluno_id, t1,t2,n1,n2,n3) VALUES (?,?,?,?,?,?)`);
-        sql.run(dados.id_aluno, dados.t1,dados.t2, dados.n1,dados.n2,dados.n3)
+        if (!dataValida(dados.data)) {
+            return NextResponse.json(
+                { erro: "Informe uma data válida." },
+                { status: 400 }
+            );
+        }
+
+        const sql = db.prepare(`
+            INSERT INTO notas (aluno_id, data, t1, t2, n1, n2, n3)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `);
+        sql.run(
+            dados.id_aluno,
+            dados.data,
+            dados.t1,
+            dados.t2,
+            dados.n1,
+            dados.n2,
+            dados.n3
+        );
         return NextResponse.json({
             mensagem: "Nota cadastrada com sucesso!"
         })
@@ -25,15 +60,32 @@ export async function POST(request){
 }
 
 export async function PUT(request) {
+    const erroAutenticacao = exigirAutenticacao(request);
+    if (erroAutenticacao) return erroAutenticacao;
+
     try {
         const dados = await request.json();
+        if (!dataValida(dados.data)) {
+            return NextResponse.json(
+                { erro: "Informe uma data válida." },
+                { status: 400 }
+            );
+        }
+
         const sql = db.prepare(`
             UPDATE notas
-            SET t1 = ?, t2 = ?, n1 = ?, n2 = ?, n3 = ?
+            SET data = ?, t1 = ?, t2 = ?, n1 = ?, n2 = ?, n3 = ?
             WHERE id_notas = ?
-            
         `);
-        sql.run(dados.t1, dados.t2, dados.n1, dados.n2, dados.n3, dados.id_notas);
+        sql.run(
+            dados.data,
+            dados.t1,
+            dados.t2,
+            dados.n1,
+            dados.n2,
+            dados.n3,
+            dados.id_notas
+        );
         return NextResponse.json({
             mensagem: "Nota atualizada com sucesso!"
         });
@@ -44,6 +96,9 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
+    const erroAutenticacao = exigirAutenticacao(request);
+    if (erroAutenticacao) return erroAutenticacao;
+
     try {
         const dados = await request.json();
         const sql = db.prepare(`DELETE FROM notas WHERE id_notas = ?`);

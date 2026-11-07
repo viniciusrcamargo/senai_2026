@@ -3,9 +3,18 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header";
 import styles from "./cadnotas.module.css";
+import { useRouter } from "next/navigation";
 
 export default function CadNotas() {
-     const [id_aluno, setIdAluno] = useState('');
+    const router = useRouter();
+    const [id_aluno, setIdAluno] = useState('');
+    const [data, setData] = useState(() => {
+        const hoje = new Date();
+        const ano = hoje.getFullYear();
+        const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+        const dia = String(hoje.getDate()).padStart(2, "0");
+        return `${ano}-${mes}-${dia}`;
+    });
     const [t1, setT1] = useState('');
     const [t2, setT2] = useState('');
     const [n1, setN1] = useState('');
@@ -33,6 +42,7 @@ export default function CadNotas() {
             },
             body: JSON.stringify({
                 id_aluno,
+                data,
                 t1,
                 t2,
                 n1,
@@ -43,7 +53,7 @@ export default function CadNotas() {
         const dados = await resposta.json();
         alert(dados.mensagem || dados.erro)
         if (resposta.ok) {
-            redirect("/listnotas")
+            router.push("/listnotas");
         }
     }
 
@@ -76,6 +86,17 @@ export default function CadNotas() {
                                         </option>
                                     ))}
                                 </select>
+                            </div>
+
+                            <div className={styles.campo}>
+                                <label htmlFor="data">Data</label>
+                                <input
+                                    id="data"
+                                    type="date"
+                                    value={data}
+                                    onChange={(event) => setData(event.target.value)}
+                                    required
+                                />
                             </div>
 
                             <div className={styles.campo}>

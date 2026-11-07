@@ -1,0 +1,174 @@
+/* Fundo */
+.main {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #050816,
+        #0f172a,
+        #1e1b4b
+    );
+
+    color: white;
+}
+
+/* Card */
+.card {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 40px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(0, 229, 255, 0.4);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 10px rgba(0, 229, 255, 0.4),
+        0 0 30px rgba(0, 229, 255, 0.2);
+}
+
+/* Título */
+.tituloArea {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.tituloArea h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 20px #00e5ff;
+}
+
+.tituloArea p {
+    color: #cbd5e1;
+}
+
+/* Form */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grupo */
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.grupo label {
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+/* Inputs */
+.grupo input {
+    padding: 14px 16px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    border-radius: 12px;
+
+    color: white;
+
+    outline: none;
+
+    transition: all 0.3s ease;
+}
+
+.grupo input::placeholder {
+    color: #94a3b8;
+}
+
+.grupo input:focus {
+    border-color: #00e5ff;
+
+    box-shadow:
+        0 0 10px rgba(0,229,255,0.5),
+        0 0 20px rgba(0,229,255,0.2);
+
+    background: rgba(255,255,255,0.12);
+}
+
+/* Botão */
+.botao {
+    margin-top: 10px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+    font-size: 1rem;
+
+    color: #000;
+
+    background: linear-gradient(
+        90deg,
+        #00e5ff,
+        #8b5cf6
+    );
+
+    transition: all 0.3s ease;
+}
+
+.botao:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 15px #00e5ff,
+        0 0 30px #8b5cf6;
+}
+
+/* Link cadastro */
+.linkCadastro {
+    margin-top: 25px;
+    text-align: center;
+    color: #cbd5e1;
+}
+
+.linkCadastro a {
+    color: #00e5ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.linkCadastro a:hover {
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 20px #00e5ff;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .card {
+        padding: 30px 25px;
+    }
+
+    .tituloArea h1 {
+        font-size: 2rem;
+    }
+}

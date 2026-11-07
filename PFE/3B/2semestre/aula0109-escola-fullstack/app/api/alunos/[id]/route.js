@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import db from "../../../db/banco";
+import { exigirAutenticacao } from "../../../lib/auth";
+import { mascararCpf } from "../../../lib/cpf";
 
 export async function GET(request, { params }) {
+  const erroAutenticacao = exigirAutenticacao(request);
+  if (erroAutenticacao) return erroAutenticacao;
+
   try {
     const resolvedParams = await params;
     const id = resolvedParams?.id;
@@ -17,7 +22,7 @@ export async function GET(request, { params }) {
       );
     }
 
-    return NextResponse.json(aluno);
+    return NextResponse.json({ ...aluno, cpf: mascararCpf(aluno.cpf) });
   } catch (erro) {
     return NextResponse.json(
       { erro: "Erro ao buscar aluno" },

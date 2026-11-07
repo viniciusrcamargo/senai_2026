@@ -2,22 +2,30 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header";
 import styles from './listalunos.module.css';
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function ListAluno() {
     const [alunos, setAlunos] = useState([]);
+    const [carregando, setCarregando] = useState(true);
     const router = useRouter();
 
     useEffect(() => {
-        buscarAlunos()
-    }, [])//toda vez que a tela for recarregada
+        buscarAlunos();
+    }, []);
 
     async function buscarAlunos() {
-        const resposta = await fetch('/api/alunos');
-        const dados = await resposta.json();
-
-        setAlunos(dados);
+        try {
+            const resposta = await fetch('/api/alunos');
+            const dados = await resposta.json();
+            if (!resposta.ok) {
+                throw new Error(dados.erro || "Não foi possível carregar os alunos.");
+            }
+            setAlunos(dados);
+        } catch (erro) {
+            alert(erro.message || "Não foi possível carregar os alunos.");
+        } finally {
+            setCarregando(false);
+        }
     }
 
     function editarAlunos(id){
@@ -52,14 +60,15 @@ export default function ListAluno() {
                     <h2>Lista de Alunos</h2>
 
                     <p>
-                        Consulte todos os alunos cadastrados no sistema.
+                        Consulte os dados dos alunos cadastrados no sistema.
                     </p>
+                    <span className={styles.contagem}>
+                        {alunos.length} {alunos.length === 1 ? "aluno cadastrado" : "alunos cadastrados"}
+                    </span>
                 </section>
 
                 <section className={styles.tabelaContainer}>
-
                     <table className={styles.tabela}>
-
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -67,35 +76,46 @@ export default function ListAluno() {
                                 <th>Idade</th>
                                 <th>Série</th>
                                 <th>RA</th>
+                                <th>CPF</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {alunos.map((aluno) => (
+                            {!carregando && alunos.length === 0 ? (
+                                <tr>
+                                    <td className={styles.mensagemTabela} colSpan={7}>
+                                        Nenhum aluno cadastrado.
+                                    </td>
+                                </tr>
+                            ) : carregando ? (
+                                <tr>
+                                    <td className={styles.mensagemTabela} colSpan={7}>
+                                        Carregando alunos...
+                                    </td>
+                                </tr>
+                            ) : alunos.map((aluno) => (
                                 <tr key={aluno.id_aluno}>
                                     <td>{aluno.id_aluno}</td>
                                     <td>{aluno.nome}</td>
                                     <td>{aluno.idade}</td>
                                     <td>{aluno.serie}</td>
                                     <td>{aluno.ra}</td>
+                                    <td className={styles.cpf}>{aluno.cpf || "—"}</td>
 
                                     <td>
-                                        <button className={styles.botaoEditar} onClick={() => editarAlunos(aluno.id_aluno)}>
+                                        <button type="button" className={styles.botaoEditar} onClick={() => editarAlunos(aluno.id_aluno)}>
                                             Editar
                                         </button>
 
-                                        <button className={styles.botaoExcluir} onClick={(e) => excluiraAluno(e)} data-id={aluno.id_aluno}>
+                                        <button type="button" className={styles.botaoExcluir} onClick={(e) => excluiraAluno(e)} data-id={aluno.id_aluno}>
                                             Excluir
                                         </button>
                                     </td>
-
                                 </tr>
                             ))}
                         </tbody>
-
                     </table>
-
                 </section>
 
             </main>
