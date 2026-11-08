@@ -26,12 +26,13 @@ export async function POST(request){
 
     try {
         const dados = await request.json();
-        if (!validarCpf(dados.cpf)) {
-            return NextResponse.json(
-                { erro: "Informe um CPF com 11 dígitos." },
-                { status: 400 }
-            );
-        }
+        console.log('dados do aluno ', dados);
+        // if (!validarCpf(dados.cpf)) {
+        //     return NextResponse.json(
+        //         { erro: "Informe um CPF com 11 dígitos." },
+        //         { status: 400 }
+        //     );
+        // }
 
         const sql = db.prepare(`
             INSERT INTO alunos (nome, idade, serie, ra, cpf)
