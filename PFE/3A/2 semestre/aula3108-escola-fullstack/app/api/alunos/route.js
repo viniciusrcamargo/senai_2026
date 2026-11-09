@@ -26,7 +26,7 @@ export async function POST(request){
 
     try {
         const dados = await request.json();
-        console.log('dados do aluno ', dados);
+        // console.log('dados do aluno ', dados);
         // if (!validarCpf(dados.cpf)) {
         //     return NextResponse.json(
         //         { erro: "Informe um CPF com 11 dígitos." },
