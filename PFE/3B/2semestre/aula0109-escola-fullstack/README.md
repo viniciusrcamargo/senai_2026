@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Escola Fullstack
 
-## Getting Started
+## Como clonar e rodar
 
-First, run the development server:
+1. Instale o [Git](https://git-scm.com/) e o [Node.js 20.9 ou superior](https://nodejs.org/).
+2. No terminal, clone o repositório:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone https://github.com/viniciusrcamargo/senai_2026.git
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Entre na pasta do projeto:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+   ```bash
+   cd senai_2026/PFE/3B/2semestre/aula0109-escola-fullstack
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Instale as dependências:
 
-## Learn More
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+5. Crie o arquivo `.env.local` na pasta raiz do projeto. Gere uma chave com:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Copie o resultado para o arquivo:
 
-## Deploy on Vercel
+   ```env
+   CPF_ENCRYPTION_KEY=cole_a_chave_gerada_aqui
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Não compartilhe essa chave nem a envie para o repositório.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. Inicie o servidor:
+
+   ```bash
+   npm run dev
+   ```
+
+7. Abra [http://localhost:3000](http://localhost:3000) no navegador.
+
+Para encerrar o servidor, pressione `Ctrl + C` no terminal.
